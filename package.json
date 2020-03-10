@@ -1,0 +1,51 @@
+{
+  "name": "docs-backend",
+  "version": "1.0.0",
+  "description": "Documentation Service",
+  "main": "src/index.js",
+  "private": true,
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test:unit": "mocha  --opts test/unit/mocha.opts 'test/unit/**/*.js' --check-leaks --exit",
+    "test:lint": "eslint src",
+    "test:cover": "nyc --report=text npm run test:unit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.4all.com/fintech/phi/services/documentation/docs-backend.git"
+  },
+  "author": "PHI",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.576.0",
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "debug": "^4.1.1",
+    "dotenv": "^8.2.0",
+    "elastic-apm-node": "^3.0.0",
+    "express": "^4.17.1",
+    "express-winston": "^4.0.3",
+    "flat-cache": "^2.0.1",
+    "helmet": "^3.21.1",
+    "js-yaml": "^3.13.1",
+    "lodash": "^4.17.15",
+    "moment-timezone": "^0.5.27",
+    "node-cache": "^5.0.2",
+    "param-case": "^2.1.1",
+    "title-case": "^2.1.1",
+    "uuid": "^7.0.2",
+    "winston": "^3.2.1",
+    "xmldom": "^0.1.27"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "glob": "^7.1.6",
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1"
+  }
+}

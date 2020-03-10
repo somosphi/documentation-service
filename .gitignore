@@ -1,0 +1,9 @@
+coverage
+node_modules
+.env
+.idea/
+.nyc_output
+.vscode
+log
+*.zip
+.temp
