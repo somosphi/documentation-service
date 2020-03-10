@@ -1,3 +1,4 @@
+const { resolve } = require('url');
 const { utc } = require('moment-timezone');
 const { v4: uuidv4 } = require('uuid');
 const env = require('../env');
@@ -52,7 +53,7 @@ const setDoctypes = async (service) => {
 
   const favicon = files.find((value) => favicons.includes(value.name));
   if (favicon) {
-    service.setContent({ icon: `/fetch${favicon.key}` });
+    service.setContent({ icon: resolve('/fetch', favicon.key) });
   }
 
   if (matchs.length === 0) {
@@ -123,10 +124,6 @@ const fetchData = async () => {
 
 exports.fetchData = fetchData;
 
-
-/**
- * @returns {Promise<import('../entities/Namespace')[]>}
- */
 const getData = async () => {
   const data = SS.get('data');
 

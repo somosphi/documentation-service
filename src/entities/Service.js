@@ -1,3 +1,4 @@
+const { resolve } = require('url');
 const titleCase = require('title-case');
 const paramCase = require('param-case');
 
@@ -27,7 +28,7 @@ class Service {
     this.description = null;
     this.icon = null;
     this.path = path;
-    this.link = `/${namespace.path}/${path}`;
+    this.link = resolve(namespace.path, path);
     this.doctypes = [];
     this.enabled = true;
   }

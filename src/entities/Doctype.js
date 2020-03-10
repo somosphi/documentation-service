@@ -1,3 +1,4 @@
+const { resolve } = require('url');
 /**
 * @class
   @property {string} key
@@ -17,8 +18,8 @@ class Doctype {
     this.key = file.key;
     this.label = doctypeEnum.label;
     this.path = doctypeEnum.slug;
-    this.link = `${service.link}/${doctypeEnum.slug}`;
-    this.location = `/fetch/${file.key}`;
+    this.link = resolve(service.link, doctypeEnum.slug);
+    this.location = resolve('/fetch', file.key);
     this.enabled = true;
     this.version = null;
     this.error = null;

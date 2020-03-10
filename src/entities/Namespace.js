@@ -1,3 +1,4 @@
+const { resolve } = require('url');
 const titleCase = require('title-case');
 const paramCase = require('param-case');
 
@@ -21,7 +22,7 @@ class Namespace {
     this.key = key;
     this.label = titleCase(key);
     this.path = path;
-    this.link = `/${path}`;
+    this.link = resolve('/', path);
     this.term = path.replace('-', '');
     this.services = [];
     this.enabled = true;
