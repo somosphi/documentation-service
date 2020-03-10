@@ -53,7 +53,12 @@ const setDoctypes = async (service) => {
 
   const favicon = files.find((value) => favicons.includes(value.name));
   if (favicon) {
-    service.setContent({ icon: resolve('/fetch', favicon.key) });
+    const icon = resolve('/', [
+      'fetch',
+      favicon.key,
+    ].join('/'));
+
+    service.setContent({ icon });
   }
 
   if (matchs.length === 0) {

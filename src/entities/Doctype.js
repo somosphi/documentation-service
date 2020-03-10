@@ -18,8 +18,14 @@ class Doctype {
     this.key = file.key;
     this.label = doctypeEnum.label;
     this.path = doctypeEnum.slug;
-    this.link = resolve(service.link, doctypeEnum.slug);
-    this.location = resolve('/fetch', file.key);
+    this.link = resolve('/', [
+      service.link,
+      doctypeEnum.slug,
+    ].join('/'));
+    this.location = resolve('/', [
+      'fetch',
+      file.key,
+    ].join('/'));
     this.enabled = true;
     this.version = null;
     this.error = null;

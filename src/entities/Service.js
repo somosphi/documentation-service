@@ -28,7 +28,10 @@ class Service {
     this.description = null;
     this.icon = null;
     this.path = path;
-    this.link = resolve(namespace.path, path);
+    this.link = resolve('/', [
+      namespace.link,
+      path,
+    ].join('/'));
     this.doctypes = [];
     this.enabled = true;
   }
