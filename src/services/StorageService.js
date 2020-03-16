@@ -19,6 +19,7 @@ const favicons = [
   'favicon.jpeg',
   'favicon.jpg',
   'favicon.gif',
+  'favicon.svg',
 ];
 
 /**
@@ -26,8 +27,10 @@ const favicons = [
  */
 const getNamespaces = async () => {
   logger.info(`${utc()}: Start fetch`);
-  const namespaces = await SimpleStorageService.ln('/', params);
-  return namespaces.map((row) => new Namespace(row.key));
+  const array = await SimpleStorageService.ln('/', params);
+  const namespaces = array.filter((row) => row.type === SimpleStorageService.DIRECTORY);
+  return namespaces.map((row) => new Namespace(row.key))
+    .filter((namespace) => namespace);
 };
 
 const validateDoctype = (file) => {
@@ -94,7 +97,8 @@ const setDoctypes = async (service) => {
  * @param {import('../entities/Namespace')} namespace
  */
 const setServices = async (namespace) => {
-  const services = await SimpleStorageService.ln(namespace.key, params);
+  const array = await SimpleStorageService.ln(namespace.key, params);
+  const services = array.filter((row) => row.type === SimpleStorageService.DIRECTORY);
   const doit = services.map(async (row) => {
     const service = new Service(row.key, namespace);
     await setDoctypes(service);
@@ -141,18 +145,21 @@ const getData = async () => {
 
 exports.getData = getData;
 
+/**
+ *
+ * @param {String} key
+ */
 const getItem = async (key) => {
   const data = S3.getKey(key);
   if (data) {
-    return data;
+    return Buffer.from(data, 'base64');
   }
 
   const response = await SimpleStorageService.get(key, params);
   if (response) {
-    const content = response.Body.toString('utf8');
-    S3.setKey(key, content);
+    S3.setKey(key, response.Body.toString('base64'));
     S3.save(true);
-    return content;
+    return response.Body;
   }
 
   return null;

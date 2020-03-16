@@ -73,15 +73,10 @@ const format = (response) => {
 exports.format = format;
 
 const fileExists = async (filename, { Bucket }) => {
-  let prefix = filename;
-  if (filename[0] === '/') {
-    prefix = filename.substring(1);
-  }
-
   try {
     await S3.headObject({
       Bucket,
-      Key: prefix,
+      Key: filename,
     }).promise();
 
     return true;
@@ -112,7 +107,7 @@ const ln = async (path, { Bucket }) => {
 
   const response = await S3.listObjectsV2({
     Bucket,
-    MaxKeys: 9000,
+    MaxKeys: 1000,
     Delimiter: '/',
     Prefix: prefix,
   }).promise();
@@ -155,15 +150,10 @@ const ln = async (path, { Bucket }) => {
 exports.ln = ln;
 
 const get = async (filename, { Bucket }) => {
-  let prefix = filename;
-  if (filename[0] === '/') {
-    prefix = filename.substring(1);
-  }
-
   try {
     const response = await S3.getObject({
       Bucket,
-      Key: prefix,
+      Key: filename,
     }).promise();
 
     return response;
