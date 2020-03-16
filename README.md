@@ -16,7 +16,7 @@
         "sns:ConfirmSubscription",
         "sns:Unsubscribe",
         "s3:ListBucket",
-        "cloudfront:CreateDistribution"
+        "cloudfront:CreateInvalidation"
       ],
       "Resource": [
         "arn:aws:sns:{regiao}:{conta}:{topico}",
