@@ -31,7 +31,7 @@
     "helmet": "^3.21.1",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",
-    "moment-timezone": "^0.5.27",
+    "moment-timezone": "^0.5.35",
     "node-cache": "^5.0.2",
     "param-case": "^2.1.1",
     "title-case": "^2.1.1",
